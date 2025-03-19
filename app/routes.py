@@ -17,9 +17,18 @@ def register():
     if not data or not data.get("username") or not data.get("email") or not data.get("password"):
         return jsonify({"error": "Missing required fields"}), 400
 
-    if User.query.filter_by(username=data['username']).first():
-        return jsonify({"error": "Username already exists"}), 400
+    # ✅ เช็กว่า Username หรือ Email มีอยู่แล้วหรือไม่
+    existing_user = User.query.filter(
+        (User.username == data['username']) | (User.email == data['email'])
+    ).first()
 
+    if existing_user:
+        if existing_user.username == data['username']:
+            return jsonify({"error": "Username already exists"}), 400
+        if existing_user.email == data['email']:
+            return jsonify({"error": "Email already exists"}), 400
+
+    # ✅ สร้าง User ใหม่
     new_user = User(username=data['username'], email=data['email'])
     new_user.set_password(data['password'])
 
