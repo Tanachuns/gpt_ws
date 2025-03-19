@@ -1,12 +1,6 @@
-# ❌ ห้ามอัปโหลดไฟล์ .env ที่เก็บ Database URL และ Secret Key
 .env
-
-# ❌ ห้ามอัปโหลดไฟล์ Python Cache
 __pycache__/
-*.pyc
-
-# ❌ ห้ามอัปโหลดไฟล์ฐานข้อมูล SQLite (ถ้ามี)
+venv/
+migrations/
 *.sqlite3
 
-# ❌ ห้ามอัปโหลด Virtual Environment (ถ้าใช้ venv)
-venv/
